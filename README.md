@@ -19,4 +19,4 @@ https://24days.in/umbraco-cms/2023/sustainable-performant/astronomically-perform
 
 ### Notes
 
-- Explore running Astro locally w HTTPS: https://www.storyblok.com/faq/setting-up-https-on-localhost-in-astro
+- Explore running Astro locally w HTTPS: https://medium.com/geekculture/ssl-cert-https-for-local-development-using-astrojs-a58f4ae39bf1
