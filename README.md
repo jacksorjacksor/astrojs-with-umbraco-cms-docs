@@ -21,4 +21,5 @@ Drafts of docs to present to AstroJS - https://docs.astro.build/en/guides/cms/
 
 ### Notes
 
+- Guide for writing Astro docs: https://contribute.docs.astro.build/
 - Explore running Astro locally w HTTPS: https://medium.com/geekculture/ssl-cert-https-for-local-development-using-astrojs-a58f4ae39bf1
