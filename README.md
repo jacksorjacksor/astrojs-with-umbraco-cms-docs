@@ -18,11 +18,29 @@ To get started, you will need to have the following:
 
 ### Setting up the Content Delivery API
 
-TODO: Add explanation on setting up Content Delivery API, locking down with key, etc.
+To enable the Content Delivery API, you must modify your Umbraco project's `appsettings.json` file, adding the following `key:value` pair:
+
+```json
+{
+  "Umbraco": {
+    "CMS": {
+      "DeliveryApi": {
+        "Enabled": true
+      }
+    }
+  }
+}
+```
+
+While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content Delivery API, there are numerous other options which can be defined here. These options cover areas such as public access, API keys, allowed content types, membership authorisation and more.
+
+For a full explanation on usage of the Content Delivery API please consult the [Umbraco Documentation](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
 
 ### Fetching Data
 
 TODO: Add explanation of simple data fetch for a page
+
+TODO: Clarify - should local dev always have Astro calling the HTTP endpoint, not the HTTPS endpoint? I've had issues on my local dev, so I think we should mention something either way. 
 
 ## Building a blog with Umbraco and Astro
 
@@ -42,7 +60,7 @@ To deploy your site visit our [deployment guides](https://docs.astro.build/en/gu
 TODO: Add section explaining webhooks
 
 ## Official Documentation
-- https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api
+- Content Delivery API - Umbraco Documentation: https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api
 
 ## Community Resources
 
@@ -53,4 +71,4 @@ TODO: Add section explaining webhooks
 ### Notes
 
 - Guide for writing Astro docs: https://contribute.docs.astro.build/
-- Explore running Astro locally w HTTPS: https://medium.com/geekculture/ssl-cert-https-for-local-development-using-astrojs-a58f4ae39bf1
+- Explore running Astro locally w HTTPS: https://medium.com/geekculture/ssl-cert-https-for-local-development-using-astrojs-a58f4ae39bf1 <= [Unsuccessful, currently believe best local dev approach is to use HTTP endpoints only - happy to be corrected! - Rich J]
