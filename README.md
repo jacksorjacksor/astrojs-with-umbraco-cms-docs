@@ -9,8 +9,6 @@ Umbraco serves as both a CMS with a built-in frontend and a headless CMS via its
 
 Umbraco offers a built-in Content Delivery API for connecting your Umbraco content to any application.
 
-You can also utilise [Umbraco Heartcore](https://umbraco.com/products/umbraco-heartcore/), a hosted headless version of Umbraco.
-
 ### Prerequisites
 
 To get started, you will need to have the following:
