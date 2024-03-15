@@ -44,6 +44,33 @@ The Content Delivery API provides a Swagger endpoint at `/umbraco/swagger`.
 
 ### Fetching Data
 
+#### Local dev, HTTPS and self-signed SSL certificates
+
+When developing locally, be aware that Node (upon which Astro is built) won't accept self-signed certificates by default. This is a problem if using the Umbraco HTTPS endpoint locally, as any `fetch` queries will result in `fetch failed` with code `DEPTH_ZERO_SELF_SIGNED_CERT`.
+
+To avoid this, either:
+
+1. Use the Umbraco HTTP endpoint for local dev
+2. Set `NODE_TLS_REJECT_UNAUTHORIZED=0` within `astro.config.js`. An approach for this involves two files:
+
+.env.development
+```
+NODE_TLS_REJECT_UNAUTHORIZED=0
+```
+
+astro.config.js
+```
+import { defineConfig } from 'astro/config';
+import { loadEnv } from "vite";
+
+const { NODE_TLS_REJECT_UNAUTHORIZED } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = NODE_TLS_REJECT_UNAUTHORIZED;
+// https://astro.build/config
+export default defineConfig({});
+```
+
+This method is described in [this blog post](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/), with an [accompanying repo](https://github.com/kjac/UmbracoAzureCloudflare).
+
 #### No client / Basic `fetch`
 
 In Astro you are now able to make `fetch` calls to the Umbraco Content Delivery API endpoint as defined in the [Data Fetching](https://docs.astro.build/en/guides/data-fetching/) area of the Astro documentation.
@@ -59,8 +86,6 @@ console.log(res);
 You can then tailor the query, and your handling of the response, accordingly.
 
 This [blog](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/) article features an example of this.
-
-N.B. if running Umbraco locally it is recommended to use the HTTP endpoint, not the HTTPS endpoint - [details](https://letsencrypt.org/docs/certificates-for-localhost/).
 
 #### With client
 
