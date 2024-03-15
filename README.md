@@ -36,11 +36,36 @@ While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content
 
 For a full explanation on usage of the Content Delivery API please consult the [Umbraco Documentation](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
 
+#### Swagger endpoint
+
+The Content Delivery API provides a Swagger endpoint at `/umbraco/swagger`.
+
+![image](https://github.com/jacksorjacksor/astrojs-with-umbraco-cms-docs/assets/5838388/3dc156ad-b3f9-472c-98aa-35452172b2db)
+
 ### Fetching Data
 
-TODO: Add explanation of simple data fetch for a page
+#### No client / Basic `fetch`
 
-TODO: Clarify - should local dev always have Astro calling the HTTP endpoint, not the HTTPS endpoint? I've had issues on my local dev, so I think we should mention something either way. 
+In Astro you are now able to make `fetch` calls to the Umbraco Content Delivery API endpoint as defined in the [Data Fetching](https://docs.astro.build/en/guides/data-fetching/) area of the Astro documentation.
+
+Example:
+```javascript
+const res = await fetch(
+  "http://localhost:9858/umbraco/delivery/api/v2/content"
+).then((res) => res.json());
+console.log(res);
+```
+
+You can then tailor the query, and your handling of the response, accordingly.
+
+This [blog](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/) article features an example of this.
+
+N.B. if running Umbraco locally it is recommended to use the HTTP endpoint, not the HTTPS endpoint - [details](https://letsencrypt.org/docs/certificates-for-localhost/).
+
+#### With client
+
+TODO: add Typescript client version, and add Content Delivery API typing via Delivery Api Extensions
+
 
 ## Building a blog with Umbraco and Astro
 
@@ -50,6 +75,8 @@ May include:
 1. Creating Blog Document Types & Content
 2. Displaying a list of Umbraco posts
 3. Using the Content Delivery API to generate pages
+
+TODO: make accompanying video tutorial
 
 ## Publishing your site
 
