@@ -123,4 +123,3 @@ TODO: Add section explaining webhooks
 ### Notes
 
 - Guide for writing Astro docs: https://contribute.docs.astro.build/
-- Explore running Astro locally w HTTPS: https://medium.com/geekculture/ssl-cert-https-for-local-development-using-astrojs-a58f4ae39bf1 <= [Unsuccessful, currently believe best local dev approach is to use HTTP endpoints only - happy to be corrected! - Rich J]
