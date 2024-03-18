@@ -36,15 +36,59 @@ While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content
 
 For a full explanation on usage of the Content Delivery API please consult the [Umbraco Documentation](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
 
+### Fetching Data
+
+Data can be fetched from the Umbraco Content Delivery API.
+
+For example, to display a list of blog articles:
+
+```javascript
+---
+const res = await fetch('http://localhost/umbraco/delivery/api/v2/content?filter=contentType:article');
+const articles = await res.json();
+---
+<h1>Astro + Umbraco 🚀</h1>
+{
+  articles.map((article) => (
+      <h1>{article.name}</h1>
+      <p>{article.articleDate}</p>
+  ))
+}
+```
+
+## Building a blog with Umbraco and Astro
+
+TODO: Add section explaining how to create a simple blog
+
+May include:
+1. Creating Blog Document Types & Content
+2. Displaying a list of Umbraco posts
+3. Using the Content Delivery API to generate pages
+
+TODO: make accompanying video tutorial
+
+## Publishing your site
+
+To deploy your site visit our [deployment guides](https://docs.astro.build/en/guides/deploy/) and follow the instructions for your preferred hosting provider.
+
+### Rebuild on Umbraco changes
+
+TODO: Add section explaining webhooks
+
+
+## Advanced Content Delivery API
+
 #### Swagger endpoint
 
 The Content Delivery API provides a Swagger endpoint at `/umbraco/swagger`.
 
 ![image](https://github.com/jacksorjacksor/astrojs-with-umbraco-cms-docs/assets/5838388/3dc156ad-b3f9-472c-98aa-35452172b2db)
 
-### Fetching Data
+## Misc, Support, Gotchas, Other notes
 
-#### Local dev, HTTPS and self-signed SSL certificates
+(This stuff may work it's way in, but may be too much information for the basic setup)
+
+### Local dev, HTTPS and self-signed SSL certificates
 
 When developing locally, be aware that Node (upon which Astro is built) won't accept self-signed certificates by default. This is a problem if using the Umbraco HTTPS endpoint locally, as any `fetch` queries will result in `fetch failed` with code `DEPTH_ZERO_SELF_SIGNED_CERT`.
 
@@ -91,25 +135,6 @@ This [blog](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/)
 
 TODO: add Typescript client version, and add Content Delivery API typing via Delivery Api Extensions
 
-
-## Building a blog with Umbraco and Astro
-
-TODO: Add section explaining how to create a simple blog
-
-May include:
-1. Creating Blog Document Types & Content
-2. Displaying a list of Umbraco posts
-3. Using the Content Delivery API to generate pages
-
-TODO: make accompanying video tutorial
-
-## Publishing your site
-
-To deploy your site visit our [deployment guides](https://docs.astro.build/en/guides/deploy/) and follow the instructions for your preferred hosting provider.
-
-### Rebuild on Umbraco changes
-
-TODO: Add section explaining webhooks
 
 ## Official Documentation
 - Content Delivery API - Umbraco Documentation: https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api
