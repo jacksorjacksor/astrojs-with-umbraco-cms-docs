@@ -49,7 +49,7 @@ const articles = await res.json();
 ---
 <h1>Astro + Umbraco 🚀</h1>
 {
-  articles.map((article) => (
+  articles.items.map((article) => (
       <h1>{article.name}</h1>
       <p>{article.articleDate}</p>
   ))
