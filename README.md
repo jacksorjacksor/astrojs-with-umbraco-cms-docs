@@ -51,7 +51,7 @@ const articles = await res.json();
 {
   articles.items.map((article) => (
       <h1>{article.name}</h1>
-      <p>{article.articleDate}</p>
+      <p>{article.properties.articleDate}</p>
   ))
 }
 ```
