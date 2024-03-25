@@ -143,8 +143,8 @@ const { article } = Astro.props;
 ---
 
 <Layout>
-	<h1>{article.properties.title}</h1>
-	<p>{article.properties.articleDate}</p>
+  <h1>{article.properties.title}</h1>
+  <p>{article.properties.articleDate}</p>
   <div set:html={article.properties.content?.markup}></div>
 </Layout>
 ```
