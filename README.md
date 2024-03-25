@@ -58,14 +58,96 @@ const articles = await res.json();
 
 ## Building a blog with Umbraco and Astro
 
-TODO: Add section explaining how to create a simple blog
+Once Astro has been setup and Umbraco installed, you are now able to create a blog that uses Umbraco as the CMS.
 
-May include:
-1. Creating Blog Document Types & Content
-2. Displaying a list of Umbraco posts
-3. Using the Content Delivery API to generate pages
+Firstly, create a Document Type in Umbraco for a simple blog 'Article'.
 
-TODO: make accompanying video tutorial
+For most information on creating Document Types, see [this guide](https://www.youtube.com/watch?v=otRuIkN80qM)
+
+To follow along below, your 'Article' Document Type should have the following properties:
+
+- Title (DataType: Text String)
+- Article Date (DataType: Date Picker)
+- Content (DataType: Rich Text Editor)
+
+### Displaying a list of blog posts
+
+This is the folder structure we will be using to create our blog.
+
+```
+src/
+│   index.astro
+│   [...slug].astro
+```
+
+We will use the homepage `index.astro` file at the root to list out the blog articles.
+
+For this we will use a `fetch` to call the Content Delivery API `content` endpoint and filter by contentType of 'article'.
+
+The article objects will include the properties and content set in the CMS.
+
+We can then loop through the articles and display a desired listing with a link to the article.
+
+```javascript
+---
+import Layout from '../../layouts/Layout.astro';
+const res = await fetch('http://localhost/umbraco/delivery/api/v2/content?filter=contentType:article');
+const articles = await res.json();
+---
+
+<Layout>
+	<h2>Blog Articles</h2>
+	{
+        articles.items.map((article: any) => (
+            <div>
+                <h3>{article.properties.title}</h3>
+                <p>{article.properties.articleDate}</p>
+                <a href={article.route.path}>Read more</a>
+            </div>
+        ))
+    }
+</Layout>
+```
+
+### Generating individual blog posts
+
+We will now create the file `[...slug].astro` file at the root of the pages directory.
+
+The `[...slug]` convention here will be used to create the Dynamic Routes for our articles. Read more about Dynamic Routing [here](https://docs.astro.build/en/guides/routing/#dynamic-routes)
+
+Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in tghis case, out blog articles.
+
+the `slug` property on `params`, is used to generate the URL path of the page.
+
+This is defined by the `[...slug].astro` naming convention.
+
+We are also passing a `props` object that will include the article returned from the API.
+
+These properties can then be used within our markup by defining `const { article } = Astro.props;`
+
+```javascript
+---
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    let data = await fetch("http://localhost/umbraco/delivery/api/v2/content?filter=contentType:article");
+    let articles = await data.json();
+    
+    return articles.items.map((article: any) => ({
+        params: { slug: article.route.path },
+        props: { article: article },
+    }));
+}
+
+const { article } = Astro.props;
+---
+
+<Layout>
+	<h1>{article.properties.title}</h1>
+	<p>{article.properties.articleDate}</p>
+  <div set:html={article.properties.content?.markup}></div>
+</Layout>
+```
 
 ## Publishing your site
 
