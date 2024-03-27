@@ -25,7 +25,8 @@ To enable the Content Delivery API, you must modify your Umbraco project's `apps
   "Umbraco": {
     "CMS": {
       "DeliveryApi": {
-        "Enabled": true
+        "Enabled": true,
+        "PublicAccess": true
       }
     }
   }
@@ -62,7 +63,7 @@ Once Astro has been setup and Umbraco installed, you are now able to create a bl
 
 Firstly, create a Document Type in Umbraco for a simple blog 'Article'.
 
-For most information on creating Document Types, see [this guide](https://www.youtube.com/watch?v=otRuIkN80qM)
+For information on creating Document Types, see [this guide](https://www.youtube.com/watch?v=otRuIkN80qM)
 
 To follow along below, your 'Article' Document Type should have the following properties:
 
@@ -76,8 +77,33 @@ This is the folder structure we will be using to create our blog.
 
 ```
 src/
-│   index.astro
-│   [...slug].astro
+  │
+  layouts/
+    │   Layout.astro
+  pages/
+    │   index.astro
+    │   [...slug].astro
+```
+
+If you don't have an existing Layout.astro template, create a `Layout.astro` file (for more information on Layouts see [here](https://docs.astro.build/en/basics/layouts/))
+
+Then add the following markup to the `Layout.astro` file:
+
+```javascript
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <main>
+        <slot />
+    </main>
+</body>
+</html>
 ```
 
 We will use the homepage `index.astro` file at the root to list out the blog articles.
@@ -90,7 +116,7 @@ We can then loop through the articles and display a desired listing with a link 
 
 ```javascript
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro';
 const res = await fetch('http://localhost/umbraco/delivery/api/v2/content?filter=contentType:article');
 const articles = await res.json();
 ---
@@ -115,7 +141,7 @@ We will now create the file `[...slug].astro` file at the root of the pages dire
 
 The `[...slug]` convention here will be used to create the Dynamic Routes for our articles. Read more about Dynamic Routing [here](https://docs.astro.build/en/guides/routing/#dynamic-routes)
 
-Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in tghis case, out blog articles.
+Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in this case, out blog articles.
 
 the `slug` property on `params`, is used to generate the URL path of the page.
 
