@@ -57,7 +57,7 @@ const articles = await res.json();
 }
 ```
 
-The `fetch` call returns all content from the site's Content Delivery API with content type `article`, with the property of `articleDate`.
+The `fetch` call returns all content from the site's Content Delivery API with content type `article`. The `article` content type must have a [Date](https://docs.umbraco.com/umbraco-cms/fundamentals/backoffice/property-editors/built-in-umbraco-property-editors/date) editor called `articleDate`.
 
 For more details on Data Fetching with Astro please read the [official documentation](https://docs.astro.build/en/guides/data-fetching/).
 
