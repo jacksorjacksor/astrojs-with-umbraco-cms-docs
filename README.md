@@ -59,6 +59,8 @@ const articles = await res.json();
 }
 ```
 
+TODO: provide explicit details of the Umbraco content type used for the above
+
 ## Building a blog with Umbraco and Astro
 
 Once Astro has been setup and Umbraco installed, you are now able to create a blog that uses Umbraco as the CMS.
