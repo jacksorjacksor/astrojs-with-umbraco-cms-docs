@@ -41,7 +41,7 @@ While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content
 
 Data can be fetched from the Umbraco Content Delivery API.
 
-For example, to display a list of blog articles:
+For example, to display a list of articles:
 
 ```javascript
 ---
@@ -57,7 +57,9 @@ const articles = await res.json();
 }
 ```
 
-TODO: provide explicit details of the Umbraco content type used for the above
+The `fetch` call returns all content from the site's Content Delivery API with content type `article`, with the property of `articleDate`.
+
+For more details on Data Fetching with Astro please read the [official documentation](https://docs.astro.build/en/guides/data-fetching/).
 
 ## Building a blog with Umbraco and Astro
 
