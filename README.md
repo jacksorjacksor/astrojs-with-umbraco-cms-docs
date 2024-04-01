@@ -57,27 +57,56 @@ const articles = await res.json();
 }
 ```
 
-The `fetch` call returns all content from the site's Content Delivery API with content type `article`. The `article` content type must have a [Date](https://docs.umbraco.com/umbraco-cms/fundamentals/backoffice/property-editors/built-in-umbraco-property-editors/date) editor called `articleDate`.
+The `fetch` call returns all content from the site's Content Delivery API with content type `article`. The `article` content type must have a [Date](https://docs.umbraco.com/umbraco-cms/fundamentals/backoffice/property-editors/built-in-umbraco-property-editors/date) property called `articleDate`.
 
 For more details on Data Fetching with Astro please read the [official documentation](https://docs.astro.build/en/guides/data-fetching/).
 
 ## Building a blog with Umbraco and Astro
 
+### Prerequisites:
+
+- Astro project, newly created with `npm create astro@latest` command with the following settings:
+	- Where should we create your new project? `./astro.frontend`
+	- How would you like to start your new project? `Empty`
+ 	- Do you plan to write TypeScript? `Yes`
+  	- How strict should TypeScript be? `Strict (recommended)`
+  	- Install dependencies? `Yes`
+  	- Initialize a new git repository? `No`
+
+- Umbraco project (v12+) - please follow this [Installation guide](https://docs.umbraco.com/umbraco-cms/fundamentals/setup/install/).
+	- Enable the Content Delivery API. Instructions have been provided in the "Setting up the Content Delivery API" section above.
+
 Once Astro has been setup and Umbraco installed, you are now able to create a blog that uses Umbraco as the CMS.
 
-Firstly, create a Document Type in Umbraco for a simple blog 'Article'.
+### Creating the blog posts in Umbraco
 
-For information on creating Document Types, see [this guide](https://www.youtube.com/watch?v=otRuIkN80qM)
+Firstly, within Umbraco, create a Document Type for a simple blog article called 'Article'.
 
 To follow along below, your 'Article' Document Type should have the following properties:
 
-- Title (DataType: Text String)
+- Title (DataType: Textstring)
 - Article Date (DataType: Date Picker)
-- Content (DataType: Rich Text Editor)
+- Content (DataType: Richtext Editor)
 
-### Displaying a list of blog posts
+TODO: add "Image" to show one type of media in use.
 
-This is the folder structure we will be using to create our blog.
+For this simple example, on the 'Article' document type, set the permission "Allow as root" to `true`.
+
+Please create and publish some test articles.
+
+Once these articles are published you should be able to retrieve the article details for all published articles as a JSON object via a GET request to the following URL:
+
+`http://localhost:44335/umbraco/delivery/api/v2/content?filter=contentType:article`
+
+Please replace the port number with your local development environment's HTTP endpoint port number.
+
+[ TODO: Check - "It is then advised to rebuild the DeliveryApiContentIndex through Settings.ExamineManagement.Indexers.DeliveryApiContentIndex.RebuildIndex" ]
+
+For information on creating Document Types, see [this guide](https://www.youtube.com/watch?v=otRuIkN80qM).
+
+### Displaying a list of blog posts in Astro
+
+Within our Astro project, this is the folder structure we will be using to create our blog:
 
 ```
 src/
@@ -89,9 +118,11 @@ src/
     │   [...slug].astro
 ```
 
-If you don't have an existing Layout.astro template, create a `Layout.astro` file (for more information on Layouts see [here](https://docs.astro.build/en/basics/layouts/))
+If using the `Empty` project, please create the `layouts/` folder, and `Layout.astro` and `[...slug].astro` files.
 
-Then add the following markup to the `Layout.astro` file:
+For more information on Layouts see the [Astro documentation](https://docs.astro.build/en/basics/layouts/).
+
+Add the following markup to the `Layout.astro` file:
 
 ```javascript
 ---
@@ -100,7 +131,7 @@ Then add the following markup to the `Layout.astro` file:
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>My Blog with Astro and Umbraco</title>
 </head>
 <body>
     <main>
@@ -118,13 +149,15 @@ The article objects will include the properties and content set in the CMS.
 
 We can then loop through the articles and display a desired listing with a link to the article.
 
+Replace the default contents of `index.astro` with the below:
+
+`index.astro`
 ```javascript
 ---
 import Layout from '../layouts/Layout.astro';
 const res = await fetch('http://localhost/umbraco/delivery/api/v2/content?filter=contentType:article');
 const articles = await res.json();
 ---
-
 <Layout>
 	<h2>Blog Articles</h2>
 	{
@@ -141,20 +174,19 @@ const articles = await res.json();
 
 ### Generating individual blog posts
 
-We will now create the file `[...slug].astro` file at the root of the pages directory.
+We will now create the file `[...slug].astro` file at the root of the `pages` directory.
 
 The `[...slug]` convention here will be used to create the Dynamic Routes for our articles. Read more about Dynamic Routing [here](https://docs.astro.build/en/guides/routing/#dynamic-routes)
 
-Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in this case, out blog articles.
+Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in this case, our blog articles.
 
-the `slug` property on `params`, is used to generate the URL path of the page.
-
-This is defined by the `[...slug].astro` naming convention.
+The `slug` property on `params` is used to generate the URL path of the page. This is defined by the `[...slug].astro` naming convention.
 
 We are also passing a `props` object that will include the article returned from the API.
 
 These properties can then be used within our markup by defining `const { article } = Astro.props;`
 
+`[...slug].astro`
 ```javascript
 ---
 import Layout from '../layouts/Layout.astro';
@@ -191,7 +223,6 @@ To deploy your site visit our [deployment guides](https://docs.astro.build/en/gu
 ### Rebuild on Umbraco changes
 
 TODO: Add section explaining webhooks
-
 
 ## Advanced Content Delivery API
 
@@ -252,6 +283,9 @@ This [blog](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/)
 
 TODO: add Typescript client version, and add Content Delivery API typing via Delivery Api Extensions
 
+#### Renaming Swagger endpoints to not be `Content20`
+
+TODO
 
 ## Official Documentation
 - Content Delivery API - Umbraco Documentation: https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api
