@@ -122,7 +122,7 @@ If using the `Empty` project, please create the `layouts/` folder, and `Layout.a
 
 For more information on Layouts see the [Astro documentation](https://docs.astro.build/en/basics/layouts/).
 
-Then add the following markup to the `Layout.astro` file:
+Add the following markup to the `Layout.astro` file:
 
 ```javascript
 ---
@@ -149,6 +149,8 @@ The article objects will include the properties and content set in the CMS.
 
 We can then loop through the articles and display a desired listing with a link to the article.
 
+Replace the default contents of `index.astro` with the below:
+
 `index.astro`
 ```javascript
 ---
@@ -156,7 +158,6 @@ import Layout from '../layouts/Layout.astro';
 const res = await fetch('http://localhost/umbraco/delivery/api/v2/content?filter=contentType:article');
 const articles = await res.json();
 ---
-
 <Layout>
 	<h2>Blog Articles</h2>
 	{
@@ -173,15 +174,13 @@ const articles = await res.json();
 
 ### Generating individual blog posts
 
-We will now create the file `[...slug].astro` file at the root of the pages directory.
+We will now create the file `[...slug].astro` file at the root of the `pages` directory.
 
 The `[...slug]` convention here will be used to create the Dynamic Routes for our articles. Read more about Dynamic Routing [here](https://docs.astro.build/en/guides/routing/#dynamic-routes)
 
-Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in this case, out blog articles.
+Here we use the `getStaticPaths()` function to return an an array of objects that represent out pages, in this case, our blog articles.
 
-the `slug` property on `params`, is used to generate the URL path of the page.
-
-This is defined by the `[...slug].astro` naming convention.
+The `slug` property on `params` is used to generate the URL path of the page. This is defined by the `[...slug].astro` naming convention.
 
 We are also passing a `props` object that will include the article returned from the API.
 
@@ -212,8 +211,9 @@ const { article } = Astro.props;
 </Layout>
 ```
 
-TODO: discuss Block List Editor usage, give example
+TODO: add links from Home page "List" view to Article page "Detail" view
 
+TODO: discuss Block List Editor usage, give example
 
 ## Publishing your site
 
