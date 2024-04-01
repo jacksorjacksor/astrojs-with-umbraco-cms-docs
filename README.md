@@ -179,8 +179,10 @@ const { article } = Astro.props;
 </Layout>
 ```
 
-TODO: discuss Block List Editor usage, give example
+N.B. `article.properties` display the warning "Property properties does not exist on type never" - this can be ignored in this instance
+TODO: fix this - [Issue 12](https://github.com/jacksorjacksor/astrojs-with-umbraco-cms-docs/issues/12)
 
+TODO: discuss Block List Editor usage, give example - or too advanced a use case?
 
 ## Publishing your site
 
