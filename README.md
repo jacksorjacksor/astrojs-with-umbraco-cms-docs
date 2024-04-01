@@ -211,8 +211,6 @@ const { article } = Astro.props;
 </Layout>
 ```
 
-TODO: add links from Home page "List" view to Article page "Detail" view
-
 TODO: discuss Block List Editor usage, give example
 
 ## Publishing your site
