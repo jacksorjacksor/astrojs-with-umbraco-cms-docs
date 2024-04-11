@@ -1,5 +1,6 @@
-# astrojs-with-umbraco-cms-docs
 Drafts of docs to present to AstroJS - https://docs.astro.build/en/guides/cms/
+
+# Umbraco & Astro
 
 [Umbraco CMS](https://umbraco.com/) is an open-source ASP.NET Core CMS. By default, Umbraco uses Razor pages for its front-end, but can be used as a headless CMS.
 
@@ -13,7 +14,6 @@ To get started, you will need to have the following:
 
 1. An Astro project - If you don’t have an Astro project yet, our [Installation guide](https://docs.astro.build/en/install/auto/) will get you up and running in no time.
 2. An Umbraco (v12+) project - If you don’t have an Umbraco project yet, please see this [Installation guide](https://docs.umbraco.com/umbraco-cms/fundamentals/setup/install/).
-
 
 ## Setting up the Content Delivery API
 
@@ -204,6 +204,7 @@ const { article } = Astro.props;
 ```
 
 You should now be able to view your Umbraco-created content through the Astro front-end. Congratulations! 🚀
+
 
 ## Publishing your site
 
