@@ -1,13 +1,11 @@
 # astrojs-with-umbraco-cms-docs
 Drafts of docs to present to AstroJS - https://docs.astro.build/en/guides/cms/
 
-[Umbraco CMS](https://umbraco.com/) is an open-source ASP.NET Core CMS.
-
-Umbraco serves as both a CMS with a built-in frontend and a headless CMS via its [Content Delivery API](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api) that can be used to provide content to your Astro project.
+[Umbraco CMS](https://umbraco.com/) is an open-source ASP.NET Core CMS. By default, Umbraco uses Razor pages for its front-end, but can be used as a headless CMS.
 
 ## Integrating with Astro
 
-Umbraco offers a built-in Content Delivery API for connecting your Umbraco content to any application.
+Use Umbraco's native [Content Delivery API](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api) to provide content to your Astro project.
 
 ## Prerequisites
 
@@ -19,7 +17,7 @@ To get started, you will need to have the following:
 
 ## Setting up the Content Delivery API
 
-To enable the Content Delivery API, you must modify your Umbraco project's `appsettings.json` file, adding the following `key:value` pair:
+To enable the Content Delivery API, update your Umbraco project's `appsettings.json` file:
 
 ```json
 {
@@ -34,7 +32,7 @@ To enable the Content Delivery API, you must modify your Umbraco project's `apps
 }
 ```
 
-While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content Delivery API, there are numerous other options which can be defined here. These options cover areas such as public access, API keys, allowed content types, membership authorisation and more. For a full explanation on usage of the Content Delivery API please consult the [Umbraco Documentation](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
+While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content Delivery API, there are other options which can be set here. These options cover areas such as public access, API keys, allowed content types, membership authorisation and more. For a full explanation on usage of the Content Delivery API please consult the [Umbraco Documentation](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
 
 ## Fetching Data
 
@@ -78,7 +76,7 @@ Once Astro has been setup and Umbraco installed, you are now able to create a bl
 
 ### Creating the blog posts in Umbraco
 
-Firstly, within Umbraco, create a Document Type for a simple blog article called 'Article'.
+From the Umbraco backoffice, create a Document Type for a simple blog article called 'Article'.
 
 To follow along below, your 'Article' Document Type should have the following properties:
 
