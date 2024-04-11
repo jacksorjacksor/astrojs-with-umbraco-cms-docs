@@ -3,22 +3,21 @@ Drafts of docs to present to AstroJS - https://docs.astro.build/en/guides/cms/
 
 [Umbraco CMS](https://umbraco.com/) is an open-source ASP.NET Core CMS.
 
-Umbraco serves as both a CMS with a built-in frontend and a headless CMS via its Content Delivery API that can be used to provide content to your Astro project.
+Umbraco serves as both a CMS with a built-in frontend and a headless CMS via its [Content Delivery API](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api) that can be used to provide content to your Astro project.
 
 ## Integrating with Astro
 
 Umbraco offers a built-in Content Delivery API for connecting your Umbraco content to any application.
 
-### Prerequisites
+## Prerequisites
 
 To get started, you will need to have the following:
 
 1. An Astro project - If you don’t have an Astro project yet, our [Installation guide](https://docs.astro.build/en/install/auto/) will get you up and running in no time.
 2. An Umbraco (v12+) project - If you don’t have an Umbraco project yet, please see this [Installation guide](https://docs.umbraco.com/umbraco-cms/fundamentals/setup/install/).
 
-TODO: add an example repo containing these.
 
-### Setting up the Content Delivery API
+## Setting up the Content Delivery API
 
 To enable the Content Delivery API, you must modify your Umbraco project's `appsettings.json` file, adding the following `key:value` pair:
 
