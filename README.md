@@ -6,7 +6,7 @@ Drafts of docs to present to AstroJS - https://docs.astro.build/en/guides/cms/
 
 ## Integrating with Astro
 
-Use Umbraco's native [Content Delivery API](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api) to provide content to your Astro project.
+In this section you will use Umbraco's native [Content Delivery API](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api) to provide content to your Astro project.
 
 ## Prerequisites
 
