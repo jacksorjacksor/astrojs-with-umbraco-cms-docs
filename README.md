@@ -36,7 +36,7 @@ To enable the Content Delivery API, you must modify your Umbraco project's `apps
 
 While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content Delivery API, there are numerous other options which can be defined here. These options cover areas such as public access, API keys, allowed content types, membership authorisation and more. For a full explanation on usage of the Content Delivery API please consult the [Umbraco Documentation](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
 
-### Fetching Data
+## Fetching Data
 
 Data can be fetched from the Umbraco Content Delivery API. Here's an example of how to display a list of articles, as described in the later section "Building a blog with Umbraco and Astro":
 
@@ -86,8 +86,6 @@ To follow along below, your 'Article' Document Type should have the following pr
 - Article Date (DataType: Date Picker)
 - Content (DataType: Richtext Editor)
 
-TODO: add "Image" to show one type of media in use.
-
 For this simple example, on the 'Article' document type, set the permission "Allow as root" to `true`.
 
 Please create and publish some test articles.
@@ -97,8 +95,6 @@ Once these articles are published you should be able to retrieve the article det
 `http://localhost:44335/umbraco/delivery/api/v2/content?filter=contentType:article`
 
 Please replace the port number with your local development environment's HTTP endpoint port number.
-
-[ TODO: Check - "It is then advised to rebuild the DeliveryApiContentIndex through Settings.ExamineManagement.Indexers.DeliveryApiContentIndex.RebuildIndex" ]
 
 For information on creating Document Types, see [this guide](https://www.youtube.com/watch?v=otRuIkN80qM).
 
@@ -209,30 +205,13 @@ const { article } = Astro.props;
 </Layout>
 ```
 
-N.B. `article.properties` display the warning "Property properties does not exist on type never" - this can be ignored in this instance
-TODO: fix this - [Issue 12](https://github.com/jacksorjacksor/astrojs-with-umbraco-cms-docs/issues/12)
-
-TODO: discuss Block List Editor usage, give example - or too advanced a use case?
+You should now be able to view your Umbraco-created content through the Astro front-end. Congratulations! 🚀
 
 ## Publishing your site
 
 To deploy your site visit our [deployment guides](https://docs.astro.build/en/guides/deploy/) and follow the instructions for your preferred hosting provider.
 
-### Rebuild on Umbraco changes
-
-TODO: Add section explaining webhooks
-
-## Advanced Content Delivery API
-
-#### Swagger endpoint
-
-The Content Delivery API provides a Swagger endpoint at `/umbraco/swagger`.
-
-![image](https://github.com/jacksorjacksor/astrojs-with-umbraco-cms-docs/assets/5838388/3dc156ad-b3f9-472c-98aa-35452172b2db)
-
-## Misc, Support, Gotchas, Other notes
-
-### Local dev, HTTPS and self-signed SSL certificates
+## Local dev, HTTPS and self-signed SSL certificates
 
 When developing locally, be aware that Node (upon which Astro is built) won't accept self-signed certificates by default. This is a problem if using the Umbraco HTTPS endpoint locally, as any `fetch` queries will result in `fetch failed` with code `DEPTH_ZERO_SELF_SIGNED_CERT`.
 
@@ -258,30 +237,6 @@ export default defineConfig({});
 ```
 
 This method is described in [this blog post](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/), with an [accompanying repo](https://github.com/kjac/UmbracoAzureCloudflare).
-
-#### No client / Basic `fetch`
-
-In Astro you are now able to make `fetch` calls to the Umbraco Content Delivery API endpoint as defined in the [Data Fetching](https://docs.astro.build/en/guides/data-fetching/) area of the Astro documentation.
-
-Example:
-```javascript
-const res = await fetch(
-  "http://localhost:9858/umbraco/delivery/api/v2/content"
-).then((res) => res.json());
-console.log(res);
-```
-
-You can then tailor the query, and your handling of the response, accordingly.
-
-This [blog](https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/) article features an example of this.
-
-#### With client
-
-TODO: add Typescript client version, and add Content Delivery API typing via Delivery Api Extensions
-
-#### Renaming Swagger endpoints to not be `Content20`
-
-TODO
 
 ## Official Documentation
 - Content Delivery API - Umbraco Documentation: https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api
