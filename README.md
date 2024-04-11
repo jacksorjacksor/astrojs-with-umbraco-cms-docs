@@ -38,9 +38,7 @@ While `Umbraco:CMS:DeliveryApi:Enabled` is the initial activator for the Content
 
 ### Fetching Data
 
-Data can be fetched from the Umbraco Content Delivery API.
-
-For example, to display a list of articles:
+Data can be fetched from the Umbraco Content Delivery API. Here's an example of how to display a list of articles, as described in the later section "Building a blog with Umbraco and Astro":
 
 ```javascript
 ---
@@ -52,6 +50,7 @@ const articles = await res.json();
   articles.items.map((article) => (
       <h1>{article.name}</h1>
       <p>{article.properties.articleDate}</p>
+      <div set:html={article.properties.content?.markup}></div>
   ))
 }
 ```
@@ -233,8 +232,6 @@ The Content Delivery API provides a Swagger endpoint at `/umbraco/swagger`.
 
 ## Misc, Support, Gotchas, Other notes
 
-(This stuff may work it's way in, but may be too much information for the basic setup)
-
 ### Local dev, HTTPS and self-signed SSL certificates
 
 When developing locally, be aware that Node (upon which Astro is built) won't accept self-signed certificates by default. This is a problem if using the Umbraco HTTPS endpoint locally, as any `fetch` queries will result in `fetch failed` with code `DEPTH_ZERO_SELF_SIGNED_CERT`.
@@ -295,7 +292,3 @@ TODO
 - Generating a TypeScript OpenAPI client from Umbraco's Content Delivery API - Rick Butterfield: https://rickbutterfield.dev/blog/typescript-openapi-umbraco-content-delivery/
 - Jamstack For Free With Azure And CloudFlare - Kenn Jacobsen: https://kjac.dev/posts/jamstack-for-free-with-azure-and-cloudflare/
 - Quick n' dirty blog with Astro and Umbraco - Kenn Jacobsen: https://kjac.dev/posts/quick-n-dirty-blog-with-astro-and-umbraco/
-
-### Notes
-
-- Guide for writing Astro docs: https://contribute.docs.astro.build/
